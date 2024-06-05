@@ -105,6 +105,8 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
             rigid.velocity = new Vector2(input.HorizontalInput * moveSpeed, rigid.velocity.y);
             
             CheckJumpInput(input);
+
+            buttonsPrev = input.NetworkButtons;
         }
 
         playerVisualController.UpdateScaleTransforms(rigid.velocity);
@@ -129,7 +131,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
             }
         }
         
-        buttonsPrev = input.NetworkButtons;
+        
     }
 
     public PlayerData GetPlayerNetworkInput() 
