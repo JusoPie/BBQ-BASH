@@ -11,9 +11,18 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     [SerializeField] private float moveSpeed = 6;
     [SerializeField] private float jumpForce = 1000;
 
+    [Header("Grounded Vars")]
+    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform groundDetectionObj;
 
-    [Networked(OnChanged = nameof(OnNicknameChanged))] private NetworkString<_8> playerName { get; set; }
+
+    [Networked(OnChanged = nameof(OnNicknameChanged))] 
+    private NetworkString<_8> playerName { get; set; }
     [Networked] private NetworkButtons buttonsPrev { get; set; }
+
+    [Networked] private NetworkBool isGrounded { get; set; }
+
+
     private float horizontal;
     private Rigidbody2D rigid;
     private PlayerVisualController playerVisualController;
@@ -49,6 +58,8 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     //"sources" define which PEER can send the RPC
     //The RpcTargets defines on which it is executed!
     [Rpc(sources: RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+
+
     private void RpcSetNickName(NetworkString<_8> nickName) 
     {
         playerName = nickName;
@@ -106,12 +117,18 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
 
     private void CheckJumpInput(PlayerData input) 
     {
-        var pressed = input.NetworkButtons.GetPressed(buttonsPrev);
-        if (pressed.WasPressed(buttonsPrev, PlayerInputButtons.Jump)) 
-        {
-            rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Force);
-        }
+        var transform1 = groundDetectionObj.transform;
+        isGrounded = (bool)Runner.GetPhysicsScene2D().OverlapBox(transform1.position, transform1.transform.localScale, 0, groundLayer);
 
+        if (isGrounded) 
+        {
+            var pressed = input.NetworkButtons.GetPressed(buttonsPrev);
+            if (pressed.WasPressed(buttonsPrev, PlayerInputButtons.Jump))
+            {
+                rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Force);
+            }
+        }
+        
         buttonsPrev = input.NetworkButtons;
     }
 

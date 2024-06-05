@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 36118481}
   - component: {fileID: 36118483}
   - component: {fileID: 36118482}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grassready (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6183,7 +6183,7 @@ GameObject:
   - component: {fileID: 929685789}
   - component: {fileID: 929685791}
   - component: {fileID: 929685790}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: grassready
   m_TagString: Untagged
   m_Icon: {fileID: 0}
