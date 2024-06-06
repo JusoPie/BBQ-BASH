@@ -21,6 +21,12 @@ public class PlayerHealthController : NetworkBehaviour
         currentHealthAmount = MAX_HEALTH_AMOUNT;
     }
 
+    [Rpc(RpcSources.StateAuthority, RpcTargets.StateAuthority)]
+    private void Rpc_ReducePlayerHealth(int damage) 
+    {
+        currentHealthAmount -= damage;
+    }
+
     private static void HealthAmountChanged(Changed<PlayerHealthController> changed)
     {
         var currentHealth = changed.Behaviour.currentHealthAmount;

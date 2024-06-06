@@ -31,7 +31,8 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     private enum PlayerInputButtons 
     { 
         None,
-        Jump
+        Jump,
+        Attack
     }
 
 
@@ -106,6 +107,8 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
             
             CheckJumpInput(input);
 
+            CheckAttackInput(input);
+
             buttonsPrev = input.NetworkButtons;
         }
 
@@ -134,11 +137,22 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         
     }
 
+    private void CheckAttackInput(PlayerData input) 
+    {
+        var pressed = input.NetworkButtons.GetPressed(buttonsPrev);
+        if (pressed.WasPressed(buttonsPrev, PlayerInputButtons.Attack))
+        {
+            playerVisualController.AttackAnimation();
+            Debug.Log("Attacking");
+        }
+    }
+
     public PlayerData GetPlayerNetworkInput() 
     {
         PlayerData data = new PlayerData();
         data.HorizontalInput = horizontal;
         data.NetworkButtons.Set(PlayerInputButtons.Jump, Input.GetKey(KeyCode.Space));
+        data.NetworkButtons.Set(PlayerInputButtons.Attack, Input.GetKey(KeyCode.RightShift));
         return data;
     }
     
