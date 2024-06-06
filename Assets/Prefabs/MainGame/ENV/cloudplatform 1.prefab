@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 4373523527779893078}
   - component: {fileID: 5912954901104620632}
   - component: {fileID: 5254771918225099885}
+  - component: {fileID: 7098842513065625712}
   m_Layer: 6
   m_Name: cloudplatform 1
   m_TagString: Untagged
@@ -113,7 +114,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.49, y: 0.89, z: 0}
-  m_LocalScale: {x: 0.4536, y: 0.4536, z: 0.4536}
+  m_LocalScale: {x: 0.4536, y: 0.39123, z: 0.4536}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 943482214026014862}
@@ -235,3 +236,24 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 0
+--- !u!95 &7098842513065625712
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484597787911200095}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a44a240ad4a32aa499f522a3fe773310, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
