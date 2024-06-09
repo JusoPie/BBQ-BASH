@@ -11,6 +11,10 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     [SerializeField] private float moveSpeed = 6;
     [SerializeField] private float jumpForce = 1000;
 
+    [Header("For Attacking")]
+    [SerializeField] private NetworkPrefabRef hitObj = NetworkPrefabRef.Empty;
+    [SerializeField] private Transform hitObjPos;
+
     [Header("Grounded Vars")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundDetectionObj;
@@ -143,6 +147,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         if (pressed.WasPressed(buttonsPrev, PlayerInputButtons.Attack))
         {
             playerVisualController.AttackAnimation();
+            Runner.Spawn(hitObj, hitObjPos.position, hitObjPos.rotation, Object.InputAuthority);
             Debug.Log("Attacking");
         }
     }
