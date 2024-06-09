@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4543042829537014689}
+  - component: {fileID: 290942729436831703}
   - component: {fileID: 5484635314947040835}
   - component: {fileID: 5800405723712299914}
   - component: {fileID: 6853469006938003763}
@@ -125,6 +126,25 @@ Transform:
   - {fileID: 7649189284679035551}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &290942729436831703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346406382664771140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1039544458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  Config: 1
+  BroadRadius: 0.70653015
+  Offset: {x: 0, y: 0, z: 0}
+  GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  Hitboxes:
+  - {fileID: 4697052269488365453}
 --- !u!114 &5484635314947040835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +167,7 @@ MonoBehaviour:
     RawGuidValue: 7f156ee0cfe3b224982202383b84e186
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: 290942729436831703}
   - {fileID: 5800405723712299914}
   - {fileID: 6853469006938003763}
   - {fileID: 4620561104698914289}
@@ -949,7 +970,6 @@ Transform:
   - {fileID: 3203325865540887061}
   - {fileID: 1129224005029583064}
   - {fileID: 3435292742102946890}
-  - {fileID: 6867187514886990106}
   m_Father: {fileID: 1940453541265285665}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6633061253187748117
@@ -1219,10 +1239,62 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2946321874133530659}
+  - {fileID: 6867187514886990106}
   - {fileID: 5468756603712901929}
   - {fileID: 7720022067407952903}
   m_Father: {fileID: 4543042829537014689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7472582771955478756
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2946321874133530659}
+  - component: {fileID: 4697052269488365453}
+  m_Layer: 3
+  m_Name: PlayerHitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2946321874133530659
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7472582771955478756}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1940453541265285665}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4697052269488365453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7472582771955478756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1014831617, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
+  SphereRadius: 0
+  BoxExtents: {x: 0.3, y: 0.55, z: 0.21}
+  Offset: {x: -0.03, y: -0.01, z: 0}
+  Root: {fileID: 290942729436831703}
+  GizmosColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &7795748252809579179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,12 +1448,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8013244788495728821}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.797, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.898, y: 0, z: -0.036538772}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5468756603712901929}
+  m_Father: {fileID: 1940453541265285665}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &3809279220588349520
 BoxCollider2D:
