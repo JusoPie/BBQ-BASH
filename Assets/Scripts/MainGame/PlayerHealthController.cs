@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class PlayerHealthController : NetworkBehaviour
 {
+    [SerializeField] private Animator hitScreenAnimator;
+    [SerializeField] private PlayerCameraControler playerCameraController;
     [SerializeField] private Image fillAmountImg;
     [SerializeField] private TextMeshProUGUI healthAmountText;
 
@@ -61,6 +63,12 @@ public class PlayerHealthController : NetworkBehaviour
         {
             //todo do hit effects
             Debug.Log("LOCAL PLAYER GOT HIT!");
+
+            const string HIT_CLIP_NAME = "HitScreen";
+            hitScreenAnimator.Play(HIT_CLIP_NAME);
+
+            var shakeAmount = new Vector3(0.15f, 0, 0);
+            playerCameraController.ShakaCamera(shakeAmount);
         }
 
         if (healthAmount <= 0) 

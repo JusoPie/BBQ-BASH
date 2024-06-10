@@ -9,6 +9,7 @@ public class AttackObjScript : NetworkBehaviour
     [SerializeField] private float lifeTimeAmount = 0.2f;
     [SerializeField] private int hitDmg = 10;
 
+    //Gives error on console??
     [Networked] private TickTimer lifeTimeTimer { get; set; }
     private Collider2D coll;
 
@@ -47,9 +48,12 @@ public class AttackObjScript : NetworkBehaviour
 
                     if (didNotHitOurOwnPlayer) 
                     {
-                        //todo damage that player
-                        Debug.Log("Did hit a player!");
-                        player.GetComponent<PlayerHealthController>().Rpc_ReducePlayerHealth(hitDmg);
+                        if (Runner.IsServer) 
+                        {
+                            Debug.Log("Did hit a player!");
+                            player.GetComponent<PlayerHealthController>().Rpc_ReducePlayerHealth(hitDmg);
+                        }
+                        
                         Runner.Despawn(Object);
                         break;
                     }
