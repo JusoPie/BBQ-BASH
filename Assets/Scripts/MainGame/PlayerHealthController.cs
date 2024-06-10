@@ -22,7 +22,7 @@ public class PlayerHealthController : NetworkBehaviour
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.StateAuthority)]
-    private void Rpc_ReducePlayerHealth(int damage) 
+    public void Rpc_ReducePlayerHealth(int damage) 
     {
         currentHealthAmount -= damage;
     }

@@ -7,6 +7,7 @@ public class AttackObjScript : NetworkBehaviour
 {
     [SerializeField] private LayerMask playerLayerMask;
     [SerializeField] private float lifeTimeAmount = 0.2f;
+    [SerializeField] private int hitDmg = 10;
 
     [Networked] private TickTimer lifeTimeTimer { get; set; }
     private Collider2D coll;
@@ -48,6 +49,7 @@ public class AttackObjScript : NetworkBehaviour
                     {
                         //todo damage that player
                         Debug.Log("Did hit a player!");
+                        player.GetComponent<PlayerHealthController>().Rpc_ReducePlayerHealth(hitDmg);
                         Runner.Despawn(Object);
                         break;
                     }
