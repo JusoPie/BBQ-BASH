@@ -5,7 +5,6 @@ public class PlayerVisualController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Transform canvasTr;
-    [SerializeField] private float attackCooldown = 0.2f;
     private readonly int isMovingHash = Animator.StringToHash("isWalking");
     private readonly int isAttackingHash = Animator.StringToHash("attack");
     private readonly int isDamagedHash = Animator.StringToHash("damage");
@@ -20,6 +19,18 @@ public class PlayerVisualController : MonoBehaviour
         originalCanvasScale = canvasTr.transform.localScale;
 
         init = true;
+    }
+
+    public void TriggerDieAnimation() 
+    {
+        const string TRIGGER = "die";
+        animator.SetTrigger(TRIGGER);
+    }
+
+    public void TriggerRespawnAnimation()
+    {
+        const string TRIGGER = "respawn";
+        animator.SetTrigger(TRIGGER);
     }
 
     public void RendererVisuals(Vector2 velocity) 

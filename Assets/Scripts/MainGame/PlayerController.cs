@@ -19,10 +19,13 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundDetectionObj;
 
-
-    [Networked(OnChanged = nameof(OnNicknameChanged))] 
-    private NetworkString<_8> playerName { get; set; }
+    [Networked] public NetworkBool PlayerIsAlive { get; private set; }
+    [Networked(OnChanged = nameof(OnNicknameChanged))] private NetworkString<_8> playerName { get; set; }
     [Networked] private NetworkButtons buttonsPrev { get; set; }
+
+    [Networked] private TickTimer respawnTimer { get; set; }
+    [Networked] private Vector2 serverNextSpawnPoint { get; set; }
+
 
     [Networked] private NetworkBool isGrounded { get; set; }
 
@@ -30,6 +33,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     private float horizontal;
     private Rigidbody2D rigid;
     private PlayerVisualController playerVisualController;
+    private PlayerHealthController playerHealthController;
 
 
     private enum PlayerInputButtons 
@@ -44,8 +48,10 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     {
         rigid = GetComponent<Rigidbody2D>();
         playerVisualController = GetComponentInChildren<PlayerVisualController>();
+        playerHealthController = GetComponent<PlayerHealthController>();
 
         SetLocalObjects();
+        PlayerIsAlive = true;
     }
 
     private void SetLocalObjects()
@@ -85,6 +91,20 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         playerNameText.text = nickName + " " + Object.InputAuthority.PlayerId;
     }
 
+    public void KillPlayer() 
+    {
+        if (Runner.IsServer) 
+        {
+            serverNextSpawnPoint = GlobalManagers.Instance.PlayerSpawnerController.GetRandomSpawnPoint();
+        }
+
+        PlayerIsAlive = false;
+        rigid.simulated = false;
+        playerVisualController.TriggerDieAnimation();
+
+        respawnTimer = TickTimer.CreateFromSeconds(Runner, 5F);
+    }
+
    
 
     //Happens before anything else Fusion does, network application, reconlation etc
@@ -93,7 +113,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     public void BeforeUpdate()
     {
         //We are the local machine
-        if (Runner.LocalPlayer == Object.HasInputAuthority) 
+        if (Runner.LocalPlayer == Object.HasInputAuthority && PlayerIsAlive) 
         {
             const string HORIZONTAL = "Horizontal";
             horizontal = Input.GetAxisRaw(HORIZONTAL);
@@ -102,10 +122,11 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
 
     public override void FixedUpdateNetwork()
     {
+        CheckRespawnTimer();
         // will return false if;
         //the client does not have state authority or input authority
         // the requested type of input does not exist in the simulation
-        if (Runner.TryGetInputForPlayer<PlayerData>(Object.InputAuthority, out var input)) 
+        if (Runner.TryGetInputForPlayer<PlayerData>(Object.InputAuthority, out var input) && PlayerIsAlive) 
         {
             rigid.velocity = new Vector2(input.HorizontalInput * moveSpeed, rigid.velocity.y);
             
@@ -117,6 +138,26 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         }
 
         playerVisualController.UpdateScaleTransforms(rigid.velocity);
+    }
+
+    private void CheckRespawnTimer() 
+    {
+        if (PlayerIsAlive) return;
+
+        if (respawnTimer.Expired(Runner)) 
+        {
+            respawnTimer = TickTimer.None;
+            RespawnPlayer();
+        }
+    }
+
+    private void RespawnPlayer()
+    {
+        PlayerIsAlive = true;
+        rigid.simulated = true;
+        rigid.position = serverNextSpawnPoint;
+        playerVisualController.TriggerRespawnAnimation();
+        playerHealthController.ResetHealthAmountToMax();
     }
 
     public override void Render()
