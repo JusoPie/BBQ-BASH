@@ -1,12 +1,14 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerVisualController : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Transform canvasTr;
-
+    [SerializeField] private float attackCooldown = 0.2f;
     private readonly int isMovingHash = Animator.StringToHash("isWalking");
     private readonly int isAttackingHash = Animator.StringToHash("attack");
+    private readonly int isDamagedHash = Animator.StringToHash("damage");
     private bool isFacingRight = true;
     private bool init;
     private Vector3 originalPlayerScale;
@@ -31,10 +33,15 @@ public class PlayerVisualController : MonoBehaviour
 
     public void AttackAnimation() 
     {
-        if (!init) return;
-
         animator.SetTrigger(isAttackingHash);
     }
+
+    public void PlayerDamageAnimation() 
+    {
+        animator.SetTrigger(isDamagedHash);
+    }
+
+
 
     public void UpdateScaleTransforms(Vector2 velocity) 
     {

@@ -338,6 +338,7 @@ MonoBehaviour:
   _interpolationDataSource: 0
   hitScreenAnimator: {fileID: 2705176733854741402}
   playerCameraController: {fileID: 3572034100021665065}
+  playerVisualController: {fileID: 4382165123301799972}
   fillAmountImg: {fileID: 1028086021446756299}
   healthAmountText: {fileID: 411420893796854833}
 --- !u!114 &3572034100021665065
@@ -453,6 +454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 7506859000381619360}
   canvasTr: {fileID: 3435292742102946890}
+  attackCooldown: 0.2
 --- !u!1 &1606864857770894882
 GameObject:
   m_ObjectHideFlags: 0

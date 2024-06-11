@@ -43,7 +43,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     public override void Spawned()
     {
         rigid = GetComponent<Rigidbody2D>();
-        playerVisualController = GetComponent<PlayerVisualController>();
+        playerVisualController = GetComponentInChildren<PlayerVisualController>();
 
         SetLocalObjects();
     }
@@ -157,7 +157,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         PlayerData data = new PlayerData();
         data.HorizontalInput = horizontal;
         data.NetworkButtons.Set(PlayerInputButtons.Jump, Input.GetKey(KeyCode.Space));
-        data.NetworkButtons.Set(PlayerInputButtons.Attack, Input.GetKey(KeyCode.RightShift));
+        data.NetworkButtons.Set(PlayerInputButtons.Attack, Input.GetKey(KeyCode.Mouse0));
         return data;
     }
     

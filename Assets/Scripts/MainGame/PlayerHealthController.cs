@@ -10,6 +10,7 @@ public class PlayerHealthController : NetworkBehaviour
 {
     [SerializeField] private Animator hitScreenAnimator;
     [SerializeField] private PlayerCameraControler playerCameraController;
+    [SerializeField] private PlayerVisualController playerVisualController;
     [SerializeField] private Image fillAmountImg;
     [SerializeField] private TextMeshProUGUI healthAmountText;
 
@@ -69,6 +70,8 @@ public class PlayerHealthController : NetworkBehaviour
 
             var shakeAmount = new Vector3(0.15f, 0, 0);
             playerCameraController.ShakaCamera(shakeAmount);
+
+            playerVisualController.PlayerDamageAnimation();
         }
 
         if (healthAmount <= 0) 
