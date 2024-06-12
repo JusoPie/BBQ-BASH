@@ -165,7 +165,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
 
     public override void Render()
     {
-        playerVisualController.RendererVisuals(rigid.velocity, playerAttackController.DidPressAttackKey);
+        playerVisualController.RendererVisuals(rigid.velocity, playerAttackController.GetIsAttacking());
     }
 
     private void CheckJumpInput(PlayerData input) 

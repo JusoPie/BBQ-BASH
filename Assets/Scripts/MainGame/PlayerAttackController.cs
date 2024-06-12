@@ -1,6 +1,7 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerAttackController : NetworkBehaviour
@@ -9,11 +10,14 @@ public class PlayerAttackController : NetworkBehaviour
     [SerializeField] private NetworkPrefabRef hitObj = NetworkPrefabRef.Empty;
     [SerializeField] private Transform hitObjPos;
     [SerializeField] private float delayBetweenAttacks = 0.2f;
+    [SerializeField] private float animationResetTime = 0.1f;
 
     [Networked, HideInInspector] public NetworkBool DidPressAttackKey { get; private set; }
 
     [Networked] private NetworkButtons buttonsPrev { get; set; }
     [Networked] private TickTimer AttackCoolDown { get; set; }
+
+    [Networked] private NetworkBool isAttacking { get; set; }
 
     private PlayerController playerController;
     private PlayerVisualController playerVisualController;
@@ -43,11 +47,27 @@ public class PlayerAttackController : NetworkBehaviour
 
         if (currentBtns.WasPressed(buttonsPrev, PlayerController.PlayerInputButtons.Attack) && AttackCoolDown.ExpiredOrNotRunning(Runner))
         {
+            isAttacking = true;
 
             AttackCoolDown = TickTimer.CreateFromSeconds(Runner, delayBetweenAttacks);
 
             Runner.Spawn(hitObj, hitObjPos.position, hitObjPos.rotation, Object.InputAuthority);
+
+            StartCoroutine(ResetAttackState());
         }
+
         
+
+    }
+
+    private IEnumerator ResetAttackState()
+    {
+        yield return new WaitForSeconds(animationResetTime);
+        isAttacking = false;
+    }
+
+    public NetworkBool GetIsAttacking()
+    {
+        return isAttacking;
     }
 }
