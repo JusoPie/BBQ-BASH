@@ -74,7 +74,7 @@ public class PlayerHealthController : NetworkBehaviour
             var shakeAmount = new Vector3(0.15f, 0, 0);
             playerCameraController.ShakaCamera(shakeAmount);
 
-            playerVisualController.PlayerDamageAnimation();
+            playerVisualController.TriggerDamageAnimation();
         }
 
         if (healthAmount <= 0) 

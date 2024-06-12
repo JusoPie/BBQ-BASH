@@ -6,8 +6,8 @@ public class PlayerVisualController : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private Transform canvasTr;
     private readonly int isMovingHash = Animator.StringToHash("isWalking");
-    private readonly int isAttackingHash = Animator.StringToHash("attack");
-    private readonly int isDamagedHash = Animator.StringToHash("damage");
+    //private readonly int isAttackingHash = Animator.StringToHash("attack");
+    //private readonly int isDamagedHash = Animator.StringToHash("damage");
     private bool isFacingRight = true;
     private bool init;
     private Vector3 originalPlayerScale;
@@ -42,15 +42,19 @@ public class PlayerVisualController : MonoBehaviour
         animator.SetBool(isMovingHash, isMoving);
     }
 
-    public void AttackAnimation() 
+    public void TriggerAttackAnimation()
     {
-        animator.SetTrigger(isAttackingHash);
+        const string TRIGGER = "attack";
+        animator.SetTrigger(TRIGGER);
     }
 
-    public void PlayerDamageAnimation() 
+    public void TriggerDamageAnimation()
     {
-        animator.SetTrigger(isDamagedHash);
+        const string TRIGGER = "damage";
+        animator.SetTrigger(TRIGGER);
     }
+
+    
 
 
 

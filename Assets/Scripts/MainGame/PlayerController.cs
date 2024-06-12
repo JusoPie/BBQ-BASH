@@ -162,6 +162,8 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         playerHealthController.ResetHealthAmountToMax();
     }
 
+
+
     public override void Render()
     {
         playerVisualController.RendererVisuals(rigid.velocity);
@@ -189,7 +191,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         var pressed = input.NetworkButtons.GetPressed(buttonsPrev);
         if (pressed.WasPressed(buttonsPrev, PlayerInputButtons.Attack))
         {
-            playerVisualController.AttackAnimation();
+            playerVisualController.TriggerAttackAnimation();
             Runner.Spawn(hitObj, hitObjPos.position, hitObjPos.rotation, Object.InputAuthority);
             Debug.Log("Attacking");
         }
