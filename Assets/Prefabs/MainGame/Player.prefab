@@ -358,7 +358,7 @@ MonoBehaviour:
   hitObj:
     RawGuidValue: 0a5d3e89d285c464e8e8912a21434870
   hitObjPos: {fileID: 6867187514886990106}
-  delayBetweenattacks: 0.2
+  delayBetweenAttacks: 0.4
   _didPressAttackKey:
     _value: 0
 --- !u!114 &4382165123301799972

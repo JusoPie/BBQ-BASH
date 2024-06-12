@@ -8,12 +8,12 @@ public class PlayerAttackController : NetworkBehaviour
     [Header("For Attacking")]
     [SerializeField] private NetworkPrefabRef hitObj = NetworkPrefabRef.Empty;
     [SerializeField] private Transform hitObjPos;
-    [SerializeField] private float delayBetweenattacks = 0.2f;
+    [SerializeField] private float delayBetweenAttacks = 0.2f;
 
-    [Networked, HideInInspector] public NetworkBool didPressAttackKey { get; private set; }
+    [Networked, HideInInspector] public NetworkBool DidPressAttackKey { get; private set; }
 
     [Networked] private NetworkButtons buttonsPrev { get; set; }
-    [Networked] private TickTimer attackCoolDown { get; set; }
+    [Networked] private TickTimer AttackCoolDown { get; set; }
 
     private PlayerController playerController;
     private PlayerVisualController playerVisualController;
@@ -28,23 +28,23 @@ public class PlayerAttackController : NetworkBehaviour
     {
         if (Runner.TryGetInputForPlayer<PlayerData>(Object.InputAuthority, out var input) && playerController.PlayerIsAlive)
         {
-            CheckShootInput(input);
+            CheckAttackInput(input);
 
             buttonsPrev = input.NetworkButtons;
         }
 
     }
 
-    private void CheckShootInput(PlayerData input)
+    private void CheckAttackInput(PlayerData input)
     {
         var currentBtns = input.NetworkButtons.GetPressed(buttonsPrev);
 
-        didPressAttackKey = currentBtns.WasPressed(buttonsPrev, PlayerController.PlayerInputButtons.Attack);
+        DidPressAttackKey = currentBtns.WasPressed(buttonsPrev, PlayerController.PlayerInputButtons.Attack);
 
-        if (currentBtns.WasPressed(buttonsPrev, PlayerController.PlayerInputButtons.Attack) && attackCoolDown.ExpiredOrNotRunning(Runner))
+        if (currentBtns.WasPressed(buttonsPrev, PlayerController.PlayerInputButtons.Attack) && AttackCoolDown.ExpiredOrNotRunning(Runner))
         {
-            playerVisualController.TriggerAttackAnimation();
-            attackCoolDown = TickTimer.CreateFromSeconds(Runner, delayBetweenattacks);
+
+            AttackCoolDown = TickTimer.CreateFromSeconds(Runner, delayBetweenAttacks);
 
             Runner.Spawn(hitObj, hitObjPos.position, hitObjPos.rotation, Object.InputAuthority);
         }
