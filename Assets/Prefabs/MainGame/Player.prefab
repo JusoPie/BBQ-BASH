@@ -195,6 +195,7 @@ GameObject:
   - component: {fileID: 5800405723712299914}
   - component: {fileID: 6853469006938003763}
   - component: {fileID: 4620561104698914289}
+  - component: {fileID: 8606892509888012719}
   - component: {fileID: 4382165123301799972}
   - component: {fileID: 3572034100021665065}
   - component: {fileID: 1755778683496159537}
@@ -269,6 +270,7 @@ MonoBehaviour:
   - {fileID: 5800405723712299914}
   - {fileID: 6853469006938003763}
   - {fileID: 4620561104698914289}
+  - {fileID: 8606892509888012719}
   - {fileID: 1755778683496159537}
   SimulationBehaviours: []
 --- !u!114 &5800405723712299914
@@ -317,9 +319,6 @@ MonoBehaviour:
   moveSpeed: 7
   jumpForce: 1000
   deathHelmet: {fileID: 4917771452740186824, guid: 31c5e96891f0d9e46bd3af666ea2c3fa, type: 3}
-  hitObj:
-    RawGuidValue: 0a5d3e89d285c464e8e8912a21434870
-  hitObjPos: {fileID: 6867187514886990106}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -343,6 +342,25 @@ MonoBehaviour:
   playerCameraController: {fileID: 3572034100021665065}
   fillAmountImg: {fileID: 1028086021446756299}
   healthAmountText: {fileID: 411420893796854833}
+--- !u!114 &8606892509888012719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346406382664771140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ed854cf8502144aa6e4765d56faa28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  hitObj:
+    RawGuidValue: 0a5d3e89d285c464e8e8912a21434870
+  hitObjPos: {fileID: 6867187514886990106}
+  delayBetweenattacks: 0.2
+  _didPressAttackKey:
+    _value: 0
 --- !u!114 &4382165123301799972
 MonoBehaviour:
   m_ObjectHideFlags: 0

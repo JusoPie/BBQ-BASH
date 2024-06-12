@@ -12,9 +12,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     [SerializeField] private float jumpForce = 1000;
     [SerializeField] private GameObject deathHelmet;
 
-    [Header("For Attacking")]
-    [SerializeField] private NetworkPrefabRef hitObj = NetworkPrefabRef.Empty;
-    [SerializeField] private Transform hitObjPos;
+    
 
     [Header("Grounded Vars")]
     [SerializeField] private LayerMask groundLayer;
@@ -35,9 +33,10 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     private Rigidbody2D rigid;
     private PlayerVisualController playerVisualController;
     private PlayerHealthController playerHealthController;
+    private PlayerAttackController playerAttackController;
 
 
-    private enum PlayerInputButtons 
+    public enum PlayerInputButtons 
     { 
         None,
         Jump,
@@ -50,6 +49,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         rigid = GetComponent<Rigidbody2D>();
         playerVisualController = GetComponentInChildren<PlayerVisualController>();
         playerHealthController = GetComponent<PlayerHealthController>();
+        playerAttackController = GetComponent<PlayerAttackController>();
 
         SetLocalObjects();
         PlayerIsAlive = true;
@@ -134,7 +134,6 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
             
             CheckJumpInput(input);
 
-            CheckAttackInput(input);
 
             buttonsPrev = input.NetworkButtons;
         }
@@ -186,16 +185,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         
     }
 
-    private void CheckAttackInput(PlayerData input) 
-    {
-        var pressed = input.NetworkButtons.GetPressed(buttonsPrev);
-        if (pressed.WasPressed(buttonsPrev, PlayerInputButtons.Attack))
-        {
-            playerVisualController.TriggerAttackAnimation();
-            Runner.Spawn(hitObj, hitObjPos.position, hitObjPos.rotation, Object.InputAuthority);
-            Debug.Log("Attacking");
-        }
-    }
+   
 
     public PlayerData GetPlayerNetworkInput() 
     {
