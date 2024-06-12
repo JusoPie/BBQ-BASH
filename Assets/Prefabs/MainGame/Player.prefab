@@ -316,6 +316,7 @@ MonoBehaviour:
   cam: {fileID: 7795748252809579179}
   moveSpeed: 7
   jumpForce: 1000
+  deathHelmet: {fileID: 4917771452740186824, guid: 31c5e96891f0d9e46bd3af666ea2c3fa, type: 3}
   hitObj:
     RawGuidValue: 0a5d3e89d285c464e8e8912a21434870
   hitObjPos: {fileID: 6867187514886990106}

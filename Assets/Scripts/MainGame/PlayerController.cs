@@ -10,6 +10,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     [SerializeField] private GameObject cam;
     [SerializeField] private float moveSpeed = 6;
     [SerializeField] private float jumpForce = 1000;
+    [SerializeField] private GameObject deathHelmet;
 
     [Header("For Attacking")]
     [SerializeField] private NetworkPrefabRef hitObj = NetworkPrefabRef.Empty;
@@ -101,6 +102,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         PlayerIsAlive = false;
         rigid.simulated = false;
         playerVisualController.TriggerDieAnimation();
+        Instantiate(deathHelmet, transform.position, transform.rotation);
 
         respawnTimer = TickTimer.CreateFromSeconds(Runner, 5F);
     }
