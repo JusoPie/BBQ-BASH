@@ -62,8 +62,9 @@ public class PlayerHealthController : NetworkBehaviour
 
     private void PlayerGotHit(int healthAmount) 
     {
+       
         var isLocalPlayer = Runner.LocalPlayer == Object.HasInputAuthority;
-        if (isLocalPlayer) 
+        if (isLocalPlayer)
         {
             //HitEffects
             Debug.Log("LOCAL PLAYER GOT HIT!");
@@ -74,6 +75,11 @@ public class PlayerHealthController : NetworkBehaviour
             var shakeAmount = new Vector3(0.15f, 0, 0);
             playerCameraController.ShakaCamera(shakeAmount);
 
+            playerVisualController.TriggerDamageAnimation();
+        }
+
+        else if (!isLocalPlayer) 
+        {
             playerVisualController.TriggerDamageAnimation();
         }
 
