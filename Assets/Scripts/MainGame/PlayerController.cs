@@ -11,12 +11,14 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     [SerializeField] private float moveSpeed = 6;
     [SerializeField] private float jumpForce = 1000;
     [SerializeField] private GameObject deathHelmet;
+    
 
     
 
     [Header("Grounded Vars")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundDetectionObj;
+    [SerializeField] private GameObject proxyGroundCollider;
 
     [Networked] public TickTimer RespawnTimer { get; private set; }
 
@@ -169,20 +171,20 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         playerVisualController.RendererVisuals(rigid.velocity, playerAttackController.GetIsAttacking());
     }
 
-    private void CheckJumpInput(PlayerData input) 
+    private void CheckJumpInput(PlayerData input)
     {
         var transform1 = groundDetectionObj.transform;
         isGrounded = (bool)Runner.GetPhysicsScene2D().OverlapBox(transform1.position, transform1.transform.localScale, 0, groundLayer);
 
-        if (isGrounded) 
+        if (isGrounded)
         {
             var pressed = input.NetworkButtons.GetPressed(buttonsPrev);
             if (pressed.WasPressed(buttonsPrev, PlayerInputButtons.Jump))
             {
                 rigid.AddForce(Vector2.up * jumpForce, ForceMode2D.Force);
+                
             }
         }
-        
         
     }
 
