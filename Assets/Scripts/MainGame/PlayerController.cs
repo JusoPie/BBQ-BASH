@@ -18,11 +18,12 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Transform groundDetectionObj;
 
+    [Networked] public TickTimer RespawnTimer { get; private set; }
+
     [Networked] public NetworkBool PlayerIsAlive { get; private set; }
     [Networked(OnChanged = nameof(OnNicknameChanged))] private NetworkString<_8> playerName { get; set; }
     [Networked] private NetworkButtons buttonsPrev { get; set; }
-
-    [Networked] private TickTimer respawnTimer { get; set; }
+ 
     [Networked] private Vector2 serverNextSpawnPoint { get; set; }
 
 
@@ -104,7 +105,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         playerVisualController.TriggerDieAnimation();
         Instantiate(deathHelmet, transform.position, transform.rotation);
 
-        respawnTimer = TickTimer.CreateFromSeconds(Runner, 5F);
+        RespawnTimer = TickTimer.CreateFromSeconds(Runner, 5F);
     }
 
    
@@ -145,9 +146,9 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     {
         if (PlayerIsAlive) return;
 
-        if (respawnTimer.Expired(Runner)) 
+        if (RespawnTimer.Expired(Runner)) 
         {
-            respawnTimer = TickTimer.None;
+            RespawnTimer = TickTimer.None;
             RespawnPlayer();
         }
     }
