@@ -14,7 +14,7 @@ public class ObjectPoolingManager : MonoBehaviour, INetworkObjectPool
     {
         if (GlobalManagers.Instance != null) 
         {
-            GlobalManagers.Instance.objectPoolingManager = this;
+            GlobalManagers.Instance.ObjectPoolingManager = this;
         }
     }
 

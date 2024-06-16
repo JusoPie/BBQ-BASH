@@ -30,7 +30,7 @@ public class PlayerAttackController : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if (Runner.TryGetInputForPlayer<PlayerData>(Object.InputAuthority, out var input) && playerController.PlayerIsAlive)
+        if (Runner.TryGetInputForPlayer<PlayerData>(Object.InputAuthority, out var input) && playerController.AcceptAnyInput)
         {
             CheckAttackInput(input);
 

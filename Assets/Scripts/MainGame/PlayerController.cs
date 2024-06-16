@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerController : NetworkBehaviour, IBeforeUpdate
 {
+    public bool AcceptAnyInput => PlayerIsAlive && !GameManager.MatchIsOver;
+
     [SerializeField] private TextMeshProUGUI playerNameText;
     [SerializeField] private GameObject cam;
     [SerializeField] private float moveSpeed = 6;
@@ -118,7 +120,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     public void BeforeUpdate()
     {
         //We are the local machine
-        if (Runner.LocalPlayer == Object.HasInputAuthority && PlayerIsAlive) 
+        if (Runner.LocalPlayer == Object.HasInputAuthority && AcceptAnyInput) 
         {
             const string HORIZONTAL = "Horizontal";
             horizontal = Input.GetAxisRaw(HORIZONTAL);
@@ -131,7 +133,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         // will return false if;
         //the client does not have state authority or input authority
         // the requested type of input does not exist in the simulation
-        if (Runner.TryGetInputForPlayer<PlayerData>(Object.InputAuthority, out var input) && PlayerIsAlive) 
+        if (Runner.TryGetInputForPlayer<PlayerData>(Object.InputAuthority, out var input) && AcceptAnyInput) 
         {
             rigid.velocity = new Vector2(input.HorizontalInput * moveSpeed, rigid.velocity.y);
             
@@ -190,7 +192,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
 
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
-        GlobalManagers.Instance.objectPoolingManager.RemoveNetworkObjectFromDic(Object);
+        GlobalManagers.Instance.ObjectPoolingManager.RemoveNetworkObjectFromDic(Object);
         Destroy(gameObject);
     }
 
