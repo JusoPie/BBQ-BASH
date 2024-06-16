@@ -47,7 +47,8 @@ public class NetworkRunnerControler : MonoBehaviour, INetworkRunnerCallbacks
             GameMode = mode,
             SessionName = roomName,
             PlayerCount = 4,
-            SceneManager = networkRunnerInstance.GetComponent<INetworkSceneManager>()
+            SceneManager = networkRunnerInstance.GetComponent<INetworkSceneManager>(),
+            ObjectPool = networkRunnerInstance.GetComponent<ObjectPoolingManager>()
         };
 
        var result = await networkRunnerInstance.StartGame(startGameArgs);

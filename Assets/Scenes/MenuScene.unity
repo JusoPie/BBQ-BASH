@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 80965926}
   - component: {fileID: 80965925}
   m_Layer: 0
-  m_Name: NetforkRunnerController
+  m_Name: NetworkRunnerController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

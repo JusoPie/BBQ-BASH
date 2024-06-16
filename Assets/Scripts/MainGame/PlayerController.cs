@@ -186,7 +186,11 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         
     }
 
-   
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        GlobalManagers.Instance.objectPoolingManager.RemoveNetworkObjectFromDic(Object);
+        Destroy(gameObject);
+    }
 
     public PlayerData GetPlayerNetworkInput() 
     {
