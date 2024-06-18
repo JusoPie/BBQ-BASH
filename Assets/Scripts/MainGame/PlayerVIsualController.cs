@@ -7,13 +7,16 @@ public class PlayerVisualController : MonoBehaviour
     [SerializeField] private Transform canvasTr;
     private readonly int isMovingHash = Animator.StringToHash("isWalking");
     private readonly int isAttackingHash = Animator.StringToHash("isAttacking");
+    private readonly int isOnAirHash = Animator.StringToHash("isOnAir");
     private bool isFacingRight = true;
     private bool init;
     private Vector3 originalPlayerScale;
     private Vector3 originalCanvasScale;
 
+
     private void Start()
     {
+
         originalPlayerScale = this.transform.localScale;
         originalCanvasScale = canvasTr.transform.localScale;
 
@@ -37,9 +40,14 @@ public class PlayerVisualController : MonoBehaviour
         if (!init) return;
 
         var isMoving = velocity.x > 0.1f || velocity.x < -0.1f;
+        var isAirborne = velocity.y > 0.1f || velocity.y < -0.1f;
 
         animator.SetBool(isMovingHash, isMoving);
+        
         animator.SetBool(isAttackingHash, isAttacking);
+
+        animator.SetBool(isOnAirHash, isAirborne);
+        animator.SetFloat("y-Velocity", velocity.y);
     }
 
     public void TriggerAttackAnimation()
