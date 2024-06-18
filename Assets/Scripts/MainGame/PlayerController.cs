@@ -133,14 +133,22 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         // will return false if;
         //the client does not have state authority or input authority
         // the requested type of input does not exist in the simulation
-        if (Runner.TryGetInputForPlayer<PlayerData>(Object.InputAuthority, out var input) && AcceptAnyInput) 
+        if (Runner.TryGetInputForPlayer<PlayerData>(Object.InputAuthority, out var input)) 
         {
-            rigid.velocity = new Vector2(input.HorizontalInput * moveSpeed, rigid.velocity.y);
+            if (AcceptAnyInput)
+            {
+                rigid.velocity = new Vector2(input.HorizontalInput * moveSpeed, rigid.velocity.y);
+
+                CheckJumpInput(input);
+
+
+                buttonsPrev = input.NetworkButtons;
+            }
+            else 
+            {
+                rigid.velocity = Vector2.zero;
+            }
             
-            CheckJumpInput(input);
-
-
-            buttonsPrev = input.NetworkButtons;
         }
 
         playerVisualController.UpdateScaleTransforms(rigid.velocity);
