@@ -44,11 +44,11 @@ TagManager:
   - name: Background
     uniqueID: 2842435537
     locked: 0
-  - name: Player
-    uniqueID: 3515495219
-    locked: 0
   - name: WorldUI
     uniqueID: 2745928973
+    locked: 0
+  - name: Player
+    uniqueID: 3515495219
     locked: 0
   - name: Foreground
     uniqueID: 4007634061
