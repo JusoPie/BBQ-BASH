@@ -369,7 +369,7 @@ MonoBehaviour:
   playerNameText: {fileID: 4889456855090597818}
   cam: {fileID: 7795748252809579179}
   moveSpeed: 7
-  jumpForce: 1000
+  jumpForce: 1100
   deathHelmet: {fileID: 4917771452740186824, guid: 31c5e96891f0d9e46bd3af666ea2c3fa, type: 3}
   groundLayer:
     serializedVersion: 2
@@ -2748,7 +2748,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.031178594, y: -21.01814}
+  m_Offset: {x: 0.031178594, y: -19.078087}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2759,7 +2759,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6882138, y: 43.03628}
+  m_Size: {x: 0.6882138, y: 39.156174}
   m_EdgeRadius: 0
 --- !u!1 &8279381655875921536
 GameObject:
