@@ -22,9 +22,13 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     [SerializeField] private Transform groundDetectionObj;
     [SerializeField] private GameObject proxyGroundCollider;
 
+    [SerializeField] private PauseMenu pauseMenu;
+
+
     [Networked] public TickTimer RespawnTimer { get; private set; }
 
     [Networked] public NetworkBool PlayerIsAlive { get; private set; }
+    [Networked, HideInInspector] public NetworkBool DidPressPauseKey { get; private set; }
     [Networked(OnChanged = nameof(OnNicknameChanged))] private NetworkString<_8> playerName { get; set; }
     [Networked] private NetworkButtons buttonsPrev { get; set; }
  
@@ -39,13 +43,15 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     private PlayerVisualController playerVisualController;
     private PlayerHealthController playerHealthController;
     private PlayerAttackController playerAttackController;
+    
 
 
     public enum PlayerInputButtons 
     { 
         None,
         Jump,
-        Attack
+        Attack,
+        Pause
     }
 
 
@@ -130,6 +136,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     public override void FixedUpdateNetwork()
     {
         CheckRespawnTimer();
+        
         // will return false if;
         //the client does not have state authority or input authority
         // the requested type of input does not exist in the simulation
@@ -140,6 +147,11 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
                 rigid.velocity = new Vector2(input.HorizontalInput * moveSpeed, rigid.velocity.y);
 
                 CheckJumpInput(input);
+
+                if (Object.HasInputAuthority == Runner.LocalPlayer) 
+                {
+                    CheckPauseInput(input);
+                }
 
 
                 buttonsPrev = input.NetworkButtons;
@@ -198,6 +210,17 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         
     }
 
+    private void CheckPauseInput(PlayerData input) 
+    {
+        var currentBtns = input.NetworkButtons.GetPressed(buttonsPrev);
+        DidPressPauseKey = currentBtns.WasPressed(buttonsPrev, PlayerController.PlayerInputButtons.Pause);
+
+        if (DidPressPauseKey && PlayerIsAlive) 
+        {
+            pauseMenu.childObj.SetActive(true);
+        }
+    }
+
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
         GlobalManagers.Instance.ObjectPoolingManager.RemoveNetworkObjectFromDic(Object);
@@ -210,6 +233,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         data.HorizontalInput = horizontal;
         data.NetworkButtons.Set(PlayerInputButtons.Jump, Input.GetKey(KeyCode.Space));
         data.NetworkButtons.Set(PlayerInputButtons.Attack, Input.GetKey(KeyCode.Mouse0));
+        data.NetworkButtons.Set(PlayerInputButtons.Pause, Input.GetKey(KeyCode.Escape));
         return data;
     }
     
