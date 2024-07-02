@@ -145,6 +145,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: cloudplatform 1 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3251261778190235584, guid: 332c7e88bb27ea643a3a610056fc1b38, type: 3}
+      propertyPath: m_SortingLayer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251261778190235584, guid: 332c7e88bb27ea643a3a610056fc1b38, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3251261778190235584, guid: 332c7e88bb27ea643a3a610056fc1b38, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -287333235
+      objectReference: {fileID: 0}
     - target: {fileID: 7261249292384563749, guid: 332c7e88bb27ea643a3a610056fc1b38, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
