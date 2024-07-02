@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 598469409827742347}
   - component: {fileID: 960649049544680983}
   - component: {fileID: 9105299966436708201}
+  - component: {fileID: -7388285930300327389}
+  - component: {fileID: 4904281549651453762}
   m_Layer: 0
   m_Name: EmoCorn
   m_TagString: Untagged
@@ -98,7 +100,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 5a00703596960ba4798e4dd8a8f6b60b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -106,3 +108,44 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-7388285930300327389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998861336834108840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 1
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2305
+  NetworkGuid:
+    RawGuidValue: 4587dbdad0466a942883b3d952126c34
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 4904281549651453762}
+  SimulationBehaviours: []
+--- !u!114 &4904281549651453762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998861336834108840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d9657776d09994091c720b6b0b16c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  moveSpeed: 2
+  maxHealth: 20
+  currentHealth: 0
+  points: 10
