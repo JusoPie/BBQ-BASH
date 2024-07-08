@@ -195,7 +195,7 @@ GameObject:
   - component: {fileID: 254427108}
   - component: {fileID: 254427110}
   - component: {fileID: 254427109}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Coal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -211,8 +211,8 @@ Transform:
   m_GameObject: {fileID: 254427107}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -960.0828, y: -539.9836, z: 0}
-  m_LocalScale: {x: 0.9573413, y: 0.98006684, z: 0.5103847}
+  m_LocalPosition: {x: -959.91, y: -540.2, z: 0}
+  m_LocalScale: {x: 1.7167231, y: 1.757475, z: 0.9152318}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1236999168}
