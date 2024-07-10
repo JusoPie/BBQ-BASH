@@ -186,9 +186,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  playerLayerMask:
+  playerHitboxLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  enemyHitboxLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
   lifeTimeAmount: 0.2
   hitDmg: 10
 --- !u!61 &5187513737783639586

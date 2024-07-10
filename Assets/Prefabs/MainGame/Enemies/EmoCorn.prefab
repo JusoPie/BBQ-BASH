@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 960649049544680983}
   - component: {fileID: 9105299966436708201}
   - component: {fileID: -7388285930300327389}
+  - component: {fileID: 5637281090817917832}
   - component: {fileID: 4904281549651453762}
   - component: {fileID: 1226001485665574560}
   - component: {fileID: 4390362427037552572}
@@ -134,9 +135,29 @@ MonoBehaviour:
     RawGuidValue: 4587dbdad0466a942883b3d952126c34
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: 5637281090817917832}
   - {fileID: 4904281549651453762}
   - {fileID: 1226001485665574560}
   SimulationBehaviours: []
+--- !u!114 &5637281090817917832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998861336834108840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1039544458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  Config: 1
+  BroadRadius: 0.7065302
+  Offset: {x: 0, y: 0, z: 0}
+  GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  Hitboxes:
+  - {fileID: 114765626729878390}
 --- !u!114 &4904281549651453762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +171,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
-  moveSpeed: 2
   maxHealth: 20
   currentHealth: 0
   points: 10
@@ -214,7 +234,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.079839826, y: 0.056183457}
+  m_Offset: {x: -0.08279687, y: 0.005914092}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -225,7 +245,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8536353, y: 1.681603}
+  m_Size: {x: 0.7885808, y: 1.5810642}
   m_EdgeRadius: 0
 --- !u!50 &5245730409554171879
 Rigidbody2D:
@@ -242,7 +262,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -264,7 +284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1483320305257338980}
   m_Layer: 0
-  m_Name: Root
+  m_Name: SyncObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -282,6 +302,57 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6293265296353983419}
   m_Father: {fileID: 598469409827742347}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7300636321109997169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6293265296353983419}
+  - component: {fileID: 114765626729878390}
+  m_Layer: 7
+  m_Name: EmoHitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6293265296353983419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7300636321109997169}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1483320305257338980}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114765626729878390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7300636321109997169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1014831617, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
+  SphereRadius: 0
+  BoxExtents: {x: 0.29, y: 0.62, z: 0.21}
+  Offset: {x: -0.07, y: 0, z: 0}
+  Root: {fileID: 5637281090817917832}
+  GizmosColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

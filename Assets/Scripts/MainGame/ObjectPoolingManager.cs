@@ -32,7 +32,7 @@ public class ObjectPoolingManager : MonoBehaviour, INetworkObjectPool
             {
                 if (item != null && item.gameObject.activeSelf == false) 
                 {
-                    //todo object  pooling aka recycle
+
                     networkObject = item;
 
                     foundMatch = true;
@@ -44,6 +44,13 @@ public class ObjectPoolingManager : MonoBehaviour, INetworkObjectPool
         if (foundMatch == false) 
         {
             networkObject = CreateObjectInstance(prefab);
+        }
+
+        //Reset the state of the enemy before returning it
+        var enemy = networkObject.GetComponent<EnemyController>();
+        if (enemy != null) 
+        {
+            enemy.ResetState();
         }
 
         return networkObject;

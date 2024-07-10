@@ -1,15 +1,14 @@
 using Fusion;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackObjScript : NetworkBehaviour
 {
-    [SerializeField] private LayerMask playerLayerMask;
+    [SerializeField] private LayerMask playerHitboxLayerMask;
+    [SerializeField] private LayerMask enemyHitboxLayerMask;
     [SerializeField] private float lifeTimeAmount = 0.2f;
     [SerializeField] private int hitDmg = 10;
 
-    //Gives error on console??
     [Networked] private TickTimer lifeTimeTimer { get; set; }
     private Collider2D coll;
 
@@ -21,44 +20,78 @@ public class AttackObjScript : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        CheckIfWeHitAPlayer();
+        CheckIfWeHitAPlayerOrEnemy();
 
-        if (lifeTimeTimer.Expired(Runner)) 
+        if (lifeTimeTimer.Expired(Runner))
         {
             lifeTimeTimer = TickTimer.None;
-            
             Runner.Despawn(Object);
         }
     }
 
     private List<LagCompensatedHit> hits = new List<LagCompensatedHit>();
-    private void CheckIfWeHitAPlayer() 
+
+    private void CheckIfWeHitAPlayerOrEnemy()
     {
-        Runner.LagCompensation.OverlapBox(transform.position, coll.bounds.size, Quaternion.identity,
-            Object.InputAuthority, hits, playerLayerMask);
+        // Check for hits on player hitboxes
+        Runner.LagCompensation.OverlapBox(
+            transform.position,
+            coll.bounds.size,
+            Quaternion.identity,
+            Object.InputAuthority,
+            hits,
+            playerHitboxLayerMask
+        );
 
-        if (hits.Count > 0) 
+        foreach (var item in hits)
         {
-            foreach (var item in hits) 
+            if (item.Hitbox != null)
             {
-                if (item.Hitbox != null) 
-                {
-                    var player = item.Hitbox.GetComponentInParent<PlayerController>();
-                    var didNotHitOurOwnPlayer = player.Object.InputAuthority.PlayerId != Object.InputAuthority.PlayerId;
+                var player = item.Hitbox.GetComponentInParent<PlayerController>();
+                var didNotHitOurOwnPlayer = player != null && player.Object.InputAuthority.PlayerId != Object.InputAuthority.PlayerId;
 
-                    if (didNotHitOurOwnPlayer && player.PlayerIsAlive) 
+                if (didNotHitOurOwnPlayer && player.PlayerIsAlive)
+                {
+                    if (Runner.IsServer)
                     {
-                        if (Runner.IsServer) 
-                        {
-                            Debug.Log("Did hit a player!");
-                            player.GetComponent<PlayerHealthController>().Rpc_ReducePlayerHealth(hitDmg);
-                        }
-                        
-                        Runner.Despawn(Object);
-                        break;
+                        Debug.Log("Did hit a player");
+                        player.GetComponent<PlayerHealthController>().Rpc_ReducePlayerHealth(hitDmg);
                     }
+
+                    Runner.Despawn(Object);
+                    return;
+                }
+            }
+        }
+
+        // Check for hits on enemy hitboxes
+        Runner.LagCompensation.OverlapBox(
+            transform.position,
+            coll.bounds.size,
+            Quaternion.identity,
+            Object.InputAuthority,
+            hits,
+            enemyHitboxLayerMask
+        );
+
+        foreach (var item in hits)
+        {
+            if (item.Hitbox != null)
+            {
+                var enemy = item.Hitbox.GetComponentInParent<EnemyController>();
+                if (enemy != null)
+                {
+                    if (Runner.IsServer)
+                    {
+                        Debug.Log("Did hit an enemy");
+                        enemy.TakeDamage(hitDmg);
+                    }
+
+                    Runner.Despawn(Object);
+                    return;
                 }
             }
         }
     }
 }
+
