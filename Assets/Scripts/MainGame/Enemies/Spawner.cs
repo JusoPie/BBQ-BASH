@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class EnemySpawner : NetworkBehaviour
 {
-    public GameObject enemyPrefab;
-    public float spawnInterval = 5f;
+    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private float spawnInterval = 5f;
+    [SerializeField] private float spawnRangeX = 8f;
     private float nextSpawnTime;
     private NetworkObject lastSpawnedEnemy;
 
@@ -30,7 +31,7 @@ public class EnemySpawner : NetworkBehaviour
 
     private void SpawnEnemy()
     {
-        Vector3 spawnPosition = new Vector3(Random.Range(-8f, 8f), transform.position.y, 0);
+        Vector3 spawnPosition = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), transform.position.y, 0);
         lastSpawnedEnemy = Runner.Spawn(enemyPrefab, spawnPosition, Quaternion.identity).GetComponent<NetworkObject>();
     }
 }
