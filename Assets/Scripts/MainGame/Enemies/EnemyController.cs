@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class EnemyController : NetworkBehaviour
 {
-    [SerializeField] private int maxHealth = 100;
-    [SerializeField] private int currentHealth;
-    [SerializeField] private int points = 10;
+    [SerializeField] protected int maxHealth = 100;
+    [SerializeField] protected int currentHealth;
+    [SerializeField] protected int points = 10;
 
-    private void Start()
+    protected virtual void Start()
     {
         ResetState();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         // Update logic if necessary
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         if (Object.HasStateAuthority)
         {
@@ -29,12 +29,12 @@ public class EnemyController : NetworkBehaviour
         }
     }
 
-    public void ResetState() 
+    public virtual void ResetState()
     {
         currentHealth = maxHealth;
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         // Award points to players or update game state here
         // e.g., GameManager.Instance.AddPoints(points);
@@ -44,6 +44,7 @@ public class EnemyController : NetworkBehaviour
 
     // Optionally, you can add more methods to customize behavior for different enemies
 }
+
 
 
 

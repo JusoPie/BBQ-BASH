@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 9105299966436708201}
   - component: {fileID: -7388285930300327389}
   - component: {fileID: 5637281090817917832}
-  - component: {fileID: 4904281549651453762}
   - component: {fileID: 1226001485665574560}
+  - component: {fileID: 4148398246006397119}
+  - component: {fileID: 1719625094939749688}
   - component: {fileID: 4390362427037552572}
   - component: {fileID: 5245730409554171879}
   m_Layer: 0
@@ -136,8 +137,9 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 5637281090817917832}
-  - {fileID: 4904281549651453762}
   - {fileID: 1226001485665574560}
+  - {fileID: 4148398246006397119}
+  - {fileID: 1719625094939749688}
   SimulationBehaviours: []
 --- !u!114 &5637281090817917832
 MonoBehaviour:
@@ -158,22 +160,6 @@ MonoBehaviour:
   GizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   Hitboxes:
   - {fileID: 114765626729878390}
---- !u!114 &4904281549651453762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 998861336834108840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4d9657776d09994091c720b6b0b16c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interpolationDataSource: 0
-  maxHealth: 20
-  currentHealth: 0
-  points: 10
 --- !u!114 &1226001485665574560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +188,35 @@ MonoBehaviour:
     RotTeleportRadians: 1.5
   UseLegacySharedModeInterpolation: 0
   TargetInterpolationDelay: 0.03
+--- !u!114 &4148398246006397119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998861336834108840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e060e2c4b20cd745a3f87d11ccfb523, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
+  maxHealth: 100
+  currentHealth: 0
+  points: 10
+--- !u!114 &1719625094939749688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998861336834108840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89073fa6971dc694ea28912e9d7c039f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
 --- !u!61 &4390362427037552572
 BoxCollider2D:
   m_ObjectHideFlags: 0
