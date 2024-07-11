@@ -3,18 +3,37 @@ using UnityEngine;
 
 public class EnemyTeleport : NetworkBehaviour
 {
+    private Vector3 lastPosition;
+
+    private void Start()
+    {
+        lastPosition = transform.position;
+    }
+
     public void Teleport()
     {
         if (TeleportPointsManager.Instance != null)
         {
-            Vector3 newPosition = TeleportPointsManager.Instance.GetRandomTeleportPoint();
-            Debug.Log($"Teleporting to {newPosition}");
-            transform.position = newPosition;
-
-            if (Object.HasStateAuthority)
+            Vector3 newPosition = TeleportPointsManager.Instance.GetRandomTeleportPoint(lastPosition);
+            if (newPosition != Vector3.zero)
             {
-                RPC_UpdatePosition(newPosition);
+                Debug.Log($"Teleporting to {newPosition}");
+                lastPosition = newPosition;
+                transform.position = newPosition;
+
+                if (Object.HasStateAuthority)
+                {
+                    RPC_UpdatePosition(newPosition);
+                }
             }
+            else
+            {
+                Debug.LogWarning("No valid teleport points found!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("TeleportPointsManager instance not found!");
         }
     }
 
@@ -24,5 +43,6 @@ public class EnemyTeleport : NetworkBehaviour
         transform.position = newPosition;
     }
 }
+
 
 

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1719625094939749688}
   - component: {fileID: 4390362427037552572}
   - component: {fileID: 5245730409554171879}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EmoCorn
   m_TagString: Untagged
   m_Icon: {fileID: 0}

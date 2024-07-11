@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class TeleportPointsManager : MonoBehaviour
 {
     public static TeleportPointsManager Instance { get; private set; }
-    private Transform[] teleportPoints;
+    private List<Transform> teleportPoints;
 
     private void Awake()
     {
@@ -11,6 +13,7 @@ public class TeleportPointsManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
             FindTeleportPoints();
         }
         else
@@ -19,20 +22,41 @@ public class TeleportPointsManager : MonoBehaviour
         }
     }
 
-    private void FindTeleportPoints()
+    private void OnDestroy()
     {
-        var points = GameObject.FindGameObjectsWithTag("TeleportPoint");
-        teleportPoints = new Transform[points.Length];
-        for (int i = 0; i < points.Length; i++)
+        if (Instance == this)
         {
-            teleportPoints[i] = points[i].transform;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 
-    public Vector3 GetRandomTeleportPoint()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (teleportPoints.Length == 0) return Vector3.zero;
-        return teleportPoints[Random.Range(0, teleportPoints.Length)].position;
+        FindTeleportPoints();
+    }
+
+    private void FindTeleportPoints()
+    {
+        teleportPoints = new List<Transform>();
+        var points = GameObject.FindGameObjectsWithTag("TeleportPoint");
+        foreach (var point in points)
+        {
+            teleportPoints.Add(point.transform);
+        }
+    }
+
+    public Vector3 GetRandomTeleportPoint(Vector3 currentPos)
+    {
+        if (teleportPoints.Count == 0) return Vector3.zero;
+
+        Vector3 newPosition;
+        do
+        {
+            newPosition = teleportPoints[Random.Range(0, teleportPoints.Count)].position;
+        } while (newPosition == currentPos);
+
+        return newPosition;
     }
 }
+
 
