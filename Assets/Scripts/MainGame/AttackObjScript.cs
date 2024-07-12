@@ -12,10 +12,17 @@ public class AttackObjScript : NetworkBehaviour
     [Networked] private TickTimer lifeTimeTimer { get; set; }
     private Collider2D coll;
 
+    private int attackerId; // Add this to track the attacker
+
     public override void Spawned()
     {
         coll = GetComponent<Collider2D>();
         lifeTimeTimer = TickTimer.CreateFromSeconds(Runner, lifeTimeAmount);
+    }
+
+    public void Initialize(int attackerId) // Add this method to initialize the attackerId
+    {
+        this.attackerId = attackerId;
     }
 
     public override void FixedUpdateNetwork()
@@ -84,7 +91,7 @@ public class AttackObjScript : NetworkBehaviour
                     if (Runner.IsServer)
                     {
                         Debug.Log("Did hit an enemy");
-                        enemy.TakeDamage(hitDmg);
+                        enemy.TakeDamage(hitDmg, attackerId); // Pass the attackerId here
                     }
 
                     Runner.Despawn(Object);
@@ -94,4 +101,5 @@ public class AttackObjScript : NetworkBehaviour
         }
     }
 }
+
 

@@ -1,7 +1,5 @@
 using Fusion;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PlayerAttackController : NetworkBehaviour
@@ -13,10 +11,8 @@ public class PlayerAttackController : NetworkBehaviour
     [SerializeField] private float animationResetTime = 0.1f;
 
     [Networked, HideInInspector] public NetworkBool DidPressAttackKey { get; private set; }
-
     [Networked] private NetworkButtons buttonsPrev { get; set; }
     [Networked] private TickTimer AttackCoolDown { get; set; }
-
     [Networked] private NetworkBool isAttacking { get; set; }
 
     private PlayerController playerController;
@@ -33,10 +29,8 @@ public class PlayerAttackController : NetworkBehaviour
         if (Runner.TryGetInputForPlayer<PlayerData>(Object.InputAuthority, out var input) && playerController.AcceptAnyInput)
         {
             CheckAttackInput(input);
-
             buttonsPrev = input.NetworkButtons;
         }
-
     }
 
     private void CheckAttackInput(PlayerData input)
@@ -48,16 +42,18 @@ public class PlayerAttackController : NetworkBehaviour
         if (currentBtns.WasPressed(buttonsPrev, PlayerController.PlayerInputButtons.Attack) && AttackCoolDown.ExpiredOrNotRunning(Runner))
         {
             isAttacking = true;
-
             AttackCoolDown = TickTimer.CreateFromSeconds(Runner, delayBetweenAttacks);
 
-            Runner.Spawn(hitObj, hitObjPos.position, hitObjPos.rotation, Object.InputAuthority);
+            var hitObject = Runner.Spawn(hitObj, hitObjPos.position, hitObjPos.rotation, Object.InputAuthority);
+            var attackObjScript = hitObject.GetComponent<AttackObjScript>();
+
+            if (attackObjScript != null)
+            {
+                attackObjScript.Initialize(playerController.PlayerID); // Initialize the attacker ID
+            }
 
             StartCoroutine(ResetAttackState());
         }
-
-        
-
     }
 
     private IEnumerator ResetAttackState()
@@ -71,3 +67,4 @@ public class PlayerAttackController : NetworkBehaviour
         return isAttacking;
     }
 }
+

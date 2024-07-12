@@ -37,6 +37,8 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
 
     [Networked] private NetworkBool isGrounded { get; set; }
 
+    public int PlayerID { get; private set; } // Add this line
+
 
     private float horizontal;
     private Rigidbody2D rigid;
@@ -64,6 +66,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
 
         SetLocalObjects();
         PlayerIsAlive = true;
+        PlayerID = Object.InputAuthority.PlayerId; // Set PlayerID here
     }
 
     private void SetLocalObjects()

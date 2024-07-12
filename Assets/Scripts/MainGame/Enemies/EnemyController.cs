@@ -3,25 +3,27 @@ using UnityEngine;
 
 public class EnemyController : NetworkBehaviour
 {
-    [SerializeField] protected int maxHealth = 100;
-    [SerializeField] protected int currentHealth;
-    [SerializeField] protected int points = 10;
+    [SerializeField] private int maxHealth = 100;
+    [SerializeField] protected int currentHealth; // Change to protected
+    [SerializeField] private int points = 10;
+    private int lastAttackerId; // Track the ID of the last player who attacked
 
-    protected virtual void Start()
+    protected virtual void Start() // Change to protected virtual
     {
         ResetState();
     }
 
-    protected virtual void Update()
+    public override void FixedUpdateNetwork()
     {
         // Update logic if necessary
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, int attackerId) // Mark as virtual
     {
         if (Object.HasStateAuthority)
         {
             currentHealth -= damage;
+            lastAttackerId = attackerId; // Update the last attacker ID
             if (currentHealth <= 0)
             {
                 Die();
@@ -29,21 +31,24 @@ public class EnemyController : NetworkBehaviour
         }
     }
 
-    public virtual void ResetState()
+    public void ResetState()
     {
         currentHealth = maxHealth;
     }
 
-    protected virtual void Die()
+    protected virtual void Die() // Mark as protected virtual
     {
-        // Award points to players or update game state here
-        // e.g., GameManager.Instance.AddPoints(points);
+        // Award points to the last player who attacked
+        if (lastAttackerId != 0)
+        {
+            GlobalManagers.Instance.GameManager.AddPoints(lastAttackerId, points);
+        }
 
         Runner.Despawn(Object); // Despawn the enemy
     }
-
-    // Optionally, you can add more methods to customize behavior for different enemies
 }
+
+
 
 
 
