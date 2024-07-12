@@ -31,7 +31,7 @@ public class EnemySpawner : NetworkBehaviour
 
     private void SpawnEnemy()
     {
-        Vector3 spawnPosition = new Vector3(Random.Range(-spawnRangeX, spawnRangeX), transform.position.y, 0);
+        Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-spawnRangeX, spawnRangeX), transform.position.y, 0);
         lastSpawnedEnemy = Runner.Spawn(enemyPrefab, spawnPosition, Quaternion.identity).GetComponent<NetworkObject>();
     }
 }
