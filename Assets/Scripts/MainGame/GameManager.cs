@@ -11,12 +11,11 @@ public class GameManager : NetworkBehaviour
 
     [SerializeField] private Camera cam;
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI scoreText; // UI element to display scores
     [SerializeField] private float matchTimerAmount = 60;
-    [SerializeField] private UIManager uiManager; // Reference to UIManager
 
     [Networked] private TickTimer matchTimer { get; set; }
-
-    private Dictionary<int, int> playerScores = new Dictionary<int, int>();
+    [Networked] private NetworkDictionary<int, int> playerScores { get; } = new NetworkDictionary<int, int>(); // Networked dictionary for scores
 
     private void Awake()
     {
@@ -29,6 +28,7 @@ public class GameManager : NetworkBehaviour
     public override void Spawned()
     {
         MatchIsOver = false;
+
         cam.gameObject.SetActive(false);
         matchTimer = TickTimer.CreateFromSeconds(Runner, matchTimerAmount);
     }
@@ -48,24 +48,41 @@ public class GameManager : NetworkBehaviour
             OnGameIsOver?.Invoke();
             Debug.Log("MATCH TIMER HAD ENDED!");
         }
+
+        UpdateScoreText(); // Update the score display
     }
 
     public void AddPoints(int playerId, int points)
     {
-        if (!playerScores.ContainsKey(playerId))
+        if (Runner.IsServer)
         {
-            playerScores[playerId] = 0;
-            uiManager.InitializePlayerScore(playerId); // Initialize UI for the player
-        }
+            if (playerScores.ContainsKey(playerId))
+            {
+                int currentPoints = playerScores.Get(playerId);
+                playerScores.Set(playerId, currentPoints + points);
+            }
+            else
+            {
+                playerScores.Add(playerId, points);
+            }
 
-        playerScores[playerId] += points;
-        Debug.Log($"Player {playerId} now has {playerScores[playerId]} points.");
-        uiManager.UpdatePlayerScore(playerId, playerScores[playerId]); // Update UI with the new score
+            Debug.Log($"Player {playerId} now has {playerScores.Get(playerId)} points.");
+        }
     }
 
-    public int GetPlayerScore(int playerId)
+
+    private void UpdateScoreText()
     {
-        return playerScores.ContainsKey(playerId) ? playerScores[playerId] : 0;
+        if (scoreText != null)
+        {
+            scoreText.text = "Scores:\n";
+            foreach (var kvp in playerScores)
+            {
+                scoreText.text += $"Player {kvp.Key}: {kvp.Value} points\n";
+            }
+        }
     }
 }
+
+
 

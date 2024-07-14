@@ -4,11 +4,11 @@ using UnityEngine;
 public class EnemyController : NetworkBehaviour
 {
     [SerializeField] private int maxHealth = 100;
-    [SerializeField] protected int currentHealth; // Change to protected
+    [SerializeField] protected int currentHealth; 
     [SerializeField] private int points = 10;
     private int lastAttackerId; // Track the ID of the last player who attacked
 
-    protected virtual void Start() // Change to protected virtual
+    protected virtual void Start() 
     {
         ResetState();
     }
@@ -18,7 +18,7 @@ public class EnemyController : NetworkBehaviour
         // Update logic if necessary
     }
 
-    public virtual void TakeDamage(int damage, int attackerId) // Mark as virtual
+    public virtual void TakeDamage(int damage, int attackerId) 
     {
         if (Object.HasStateAuthority)
         {
@@ -36,7 +36,7 @@ public class EnemyController : NetworkBehaviour
         currentHealth = maxHealth;
     }
 
-    protected virtual void Die() // Mark as protected virtual
+    protected virtual void Die() 
     {
         // Award points to the last player who attacked
         if (lastAttackerId != 0)
