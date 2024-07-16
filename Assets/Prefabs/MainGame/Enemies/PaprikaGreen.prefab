@@ -274,6 +274,7 @@ MonoBehaviour:
   maxHealth: 60
   currentHealth: 0
   points: 20
+  deathEffect: {fileID: -1753091981234042390, guid: f165ff048d8f9c7479a4fb5080fabfb3, type: 3}
 --- !u!1 &878690611336832021
 GameObject:
   m_ObjectHideFlags: 0

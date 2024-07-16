@@ -7,6 +7,7 @@ public class EnemyController : NetworkBehaviour
     [SerializeField] protected int currentHealth; 
     [SerializeField] private int points = 10;
     private int lastAttackerId; // Track the ID of the last player who attacked
+    [SerializeField] private NetworkObject deathEffect;
 
     protected virtual void Start() 
     {
@@ -42,9 +43,12 @@ public class EnemyController : NetworkBehaviour
         if (lastAttackerId != 0)
         {
             GlobalManagers.Instance.GameManager.AddPoints(lastAttackerId, points);
+
         }
 
+        Runner.Spawn(deathEffect, transform.position, Quaternion.identity);
         Runner.Despawn(Object); // Despawn the enemy
+        
     }
 }
 
