@@ -21,6 +21,6 @@ public class PaprikaSript : EnemyController
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     private void RPC_PlayDamageAnim() 
     {
-        animator.SetTrigger("DamagePaprikaGreen");
+        animator.SetTrigger("DamagePaprika");
     }
 }
