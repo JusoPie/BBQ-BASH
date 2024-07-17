@@ -46,9 +46,18 @@ public class EnemyController : NetworkBehaviour
 
         }
 
-        Runner.Spawn(deathEffect, transform.position, Quaternion.identity);
+        RPC_SpawnDeathEffect();
         Runner.Despawn(Object); // Despawn the enemy
         
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_SpawnDeathEffect()
+    {
+        if (deathEffect != null)
+        {
+            Runner.Spawn(deathEffect, transform.position, Quaternion.identity);
+        }
     }
 }
 

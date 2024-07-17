@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -23,7 +24,7 @@ public class TeleportingEnemy : EnemyController
         {
             Debug.Log($"Taking damage: {damage} from player: {attackerId}");
             base.TakeDamage(damage, attackerId);
-            animator.SetTrigger("ShockEmoCorn");
+            RPC_PlayShockAnimation();
 
             // Trigger teleportation when taking damage if still alive
             if (enemyTeleport != null && currentHealth > 0)
@@ -61,6 +62,12 @@ public class TeleportingEnemy : EnemyController
         base.ResetState();
         isDead = false; // Reset the isDead flag
         canTakeDamage = true; // Reset canTakeDamage
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_PlayShockAnimation()
+    {
+        animator.SetTrigger("ShockEmoCorn");
     }
 }
 
