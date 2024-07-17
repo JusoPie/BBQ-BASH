@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DeathEffectScript : NetworkBehaviour
 {
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(DeactivateEffect());
     }

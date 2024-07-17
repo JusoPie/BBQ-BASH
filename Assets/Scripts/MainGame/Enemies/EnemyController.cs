@@ -59,6 +59,8 @@ public class EnemyController : NetworkBehaviour
             Runner.Spawn(deathEffect, transform.position, Quaternion.identity);
         }
     }
+
+    
 }
 
 

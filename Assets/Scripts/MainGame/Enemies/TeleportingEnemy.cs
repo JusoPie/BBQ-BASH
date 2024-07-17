@@ -69,5 +69,7 @@ public class TeleportingEnemy : EnemyController
     {
         animator.SetTrigger("ShockEmoCorn");
     }
+
+    
 }
 
