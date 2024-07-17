@@ -204,6 +204,7 @@ MonoBehaviour:
   maxHealth: 30
   currentHealth: 0
   points: 10
+  deathEffect: {fileID: -1753091981234042390, guid: f165ff048d8f9c7479a4fb5080fabfb3, type: 3}
   waitForAnimation: 0.9
 --- !u!114 &1719625094939749688
 MonoBehaviour:

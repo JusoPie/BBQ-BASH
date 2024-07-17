@@ -7,9 +7,8 @@ public class TeleportingEnemy : EnemyController
     private EnemyTeleport enemyTeleport;
     private Animator animator;
     private bool canTakeDamage = true;
+    private bool isDead = false; // Flag to prevent multiple deaths
     [SerializeField] private float waitForAnimation = 1f;
-    
-
 
     protected override void Start() // Override the Start method
     {
@@ -20,7 +19,7 @@ public class TeleportingEnemy : EnemyController
 
     public override void TakeDamage(int damage, int attackerId) // Override the TakeDamage method
     {
-        if (canTakeDamage == true)
+        if (canTakeDamage && !isDead) // Ensure the enemy can take damage and is not dead
         {
             Debug.Log($"Taking damage: {damage} from player: {attackerId}");
             base.TakeDamage(damage, attackerId);
@@ -39,7 +38,7 @@ public class TeleportingEnemy : EnemyController
     private IEnumerator WaitForShockAnim()
     {
         yield return new WaitForSeconds(waitForAnimation);
-        if (enemyTeleport != null && currentHealth > 0)
+        if (enemyTeleport != null && currentHealth > 0 && !isDead)
         {
             Debug.Log("Teleporting after delay");
             enemyTeleport.Teleport();
@@ -50,8 +49,18 @@ public class TeleportingEnemy : EnemyController
     // Additional logic when TeleportingEnemy dies, if any, can be added here
     protected override void Die() // Override the Die method
     {
+        if (isDead) return; // Prevent multiple calls to Die
+        isDead = true; // Set the isDead flag
 
         base.Die();
         // Additional logic specific to TeleportingEnemy can be added here
     }
+
+    public override void ResetState() // Override the ResetState method
+    {
+        base.ResetState();
+        isDead = false; // Reset the isDead flag
+        canTakeDamage = true; // Reset canTakeDamage
+    }
 }
+

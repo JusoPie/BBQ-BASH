@@ -32,7 +32,7 @@ public class EnemyController : NetworkBehaviour
         }
     }
 
-    public void ResetState()
+    public virtual void ResetState()
     {
         currentHealth = maxHealth;
     }
