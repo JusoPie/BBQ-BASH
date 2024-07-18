@@ -34,6 +34,7 @@ public class NetworkRunnerControler : MonoBehaviour, INetworkRunnerCallbacks
         if (networkRunnerInstance == null) 
         {
             networkRunnerInstance = Instantiate(networkRunnerPrefab);
+            
         }
 
         //Register so we will get the callbacks as well
@@ -63,6 +64,7 @@ public class NetworkRunnerControler : MonoBehaviour, INetworkRunnerCallbacks
             Debug.LogError($"Failed to start: {result.ShutdownReason}");
         }
     }
+
 
     public void OnConnectedToServer(NetworkRunner runner)
     {
