@@ -58,6 +58,7 @@ public class NetworkRunnerControler : MonoBehaviour, INetworkRunnerCallbacks
         {
             const string SCENE_NAME = "MainGame";
             networkRunnerInstance.SetActiveScene(SCENE_NAME);
+            MusicPlayer.PlayGameMusic();
         }
         else 
         {
@@ -143,6 +144,7 @@ public class NetworkRunnerControler : MonoBehaviour, INetworkRunnerCallbacks
 
         const string LOBBY_SCENE = "MenuScene";
         SceneManager.LoadScene(LOBBY_SCENE);
+        MusicPlayer.PlayMenuMusic();
     }
 
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message)
