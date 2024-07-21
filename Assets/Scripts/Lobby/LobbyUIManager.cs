@@ -18,6 +18,8 @@ public class LobbyUIManager : MonoBehaviour
         }
 
         Instantiate(loadingCanvasControllerPrefab);
+
+
     }
 
     // Update is called once per frame

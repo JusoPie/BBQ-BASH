@@ -33,6 +33,8 @@ public class GameManager : NetworkBehaviour
         matchTimer = TickTimer.CreateFromSeconds(Runner, matchTimerAmount);
     }
 
+   
+
     public override void FixedUpdateNetwork()
     {
         if (matchTimer.Expired(Runner) == false && matchTimer.RemainingTime(Runner).HasValue)
