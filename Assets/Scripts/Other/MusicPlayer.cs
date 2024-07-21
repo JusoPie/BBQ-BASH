@@ -101,4 +101,16 @@ public class MusicPlayer : MonoBehaviour
             Debug.LogError("Unavailable MusicPlayer component");
         }
     }
+
+    /// <summary>
+    /// Sets the volume of the audio source.
+    /// </summary>
+    /// <param name="volume">Volume level between 0 and 1</param>
+    static public void SetVolume(float volume)
+    {
+        if (instance != null && instance.source != null)
+        {
+            instance.source.volume = volume;
+        }
+    }
 }

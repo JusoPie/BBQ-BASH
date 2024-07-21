@@ -736,10 +736,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: longerplatform (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1336795794369826303, guid: bec412cc6fefbd642b0a56fe41c6c5eb, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 2708012587889902023, guid: bec412cc6fefbd642b0a56fe41c6c5eb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.87

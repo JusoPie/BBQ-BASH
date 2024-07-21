@@ -218,10 +218,11 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         var currentBtns = input.NetworkButtons.GetPressed(buttonsPrev);
         DidPressPauseKey = currentBtns.WasPressed(buttonsPrev, PlayerController.PlayerInputButtons.Pause);
 
-        if (DidPressPauseKey && PlayerIsAlive) 
+        if (DidPressPauseKey && PlayerIsAlive)
         {
             pauseMenu.childObj.SetActive(true);
         }
+        
     }
 
     public override void Despawned(NetworkRunner runner, bool hasState)
