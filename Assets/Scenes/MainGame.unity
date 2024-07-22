@@ -265,6 +265,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 7843777333963640285, guid: c6a76895080585646ab6f84d7a816eed, type: 3}
   spawnInterval: 8
   spawnRangeX: 1
+  initialSpawnDelay: 1
 --- !u!4 &29212454
 Transform:
   m_ObjectHideFlags: 0
@@ -1894,8 +1895,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   enemyPrefab: {fileID: 1749394845296878928, guid: dde8d8fc8f71ed14997337e104f1add5, type: 3}
-  spawnInterval: 5
+  spawnInterval: 30
   spawnRangeX: 0.2
+  initialSpawnDelay: 30
 --- !u!4 &491851959
 Transform:
   m_ObjectHideFlags: 0
@@ -2192,8 +2194,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interpolationDataSource: 0
   enemyPrefab: {fileID: 359265798958098426, guid: d01145ef3608c704eb85b558729a521d, type: 3}
-  spawnInterval: 6
+  spawnInterval: 7
   spawnRangeX: 1
+  initialSpawnDelay: 1
 --- !u!4 &568226977
 Transform:
   m_ObjectHideFlags: 0
@@ -4371,6 +4374,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 998861336834108840, guid: 4587dbdad0466a942883b3d952126c34, type: 3}
   spawnInterval: 5
   spawnRangeX: 8
+  initialSpawnDelay: 3
 --- !u!1001 &1277040077
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6967,7 +6971,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 364.3176, y: 348.5633}
+  m_SizeDelta: {x: 427.4463, y: 713.0809}
   m_Pivot: {x: 0, y: 1}
 --- !u!1001 &2113971499
 PrefabInstance:

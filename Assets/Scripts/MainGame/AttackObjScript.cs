@@ -85,7 +85,7 @@ public class AttackObjScript : NetworkBehaviour
                     if (Runner.IsServer)
                     {
                         Debug.Log("Did hit an enemy");
-                        enemy.TakeDamage(hitDmg, Object.InputAuthority.PlayerId); // Pass the attacker ID
+                        enemy.TakeDamage(hitDmg, attackerId); // Pass the attacker ID
                     }
 
                     Runner.Despawn(Object);
@@ -100,6 +100,7 @@ public class AttackObjScript : NetworkBehaviour
         attackerId = playerId;
     }
 }
+
 
 
 

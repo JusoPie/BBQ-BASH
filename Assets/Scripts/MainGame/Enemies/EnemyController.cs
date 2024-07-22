@@ -21,14 +21,11 @@ public class EnemyController : NetworkBehaviour
 
     public virtual void TakeDamage(int damage, int attackerId) 
     {
-        if (Object.HasStateAuthority)
+        currentHealth -= damage;
+        lastAttackerId = attackerId; // Update the last attacker ID
+        if (currentHealth <= 0)
         {
-            currentHealth -= damage;
-            lastAttackerId = attackerId; // Update the last attacker ID
-            if (currentHealth <= 0)
-            {
-                Die();
-            }
+            Die();
         }
     }
 
