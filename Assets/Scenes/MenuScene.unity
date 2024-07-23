@@ -1357,6 +1357,7 @@ GameObject:
   - component: {fileID: 1065634402}
   - component: {fileID: 1065634401}
   - component: {fileID: 1065634400}
+  - component: {fileID: 1065634403}
   m_Layer: 0
   m_Name: SoundFXManager
   m_TagString: Untagged
@@ -1376,6 +1377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e3650e8e9d37e47827df6de66dd890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _interpolationDataSource: 0
   hitSound: {fileID: 8300000, guid: 449af348ed1da0f4e8d4597b2e3420f6, type: 3}
   shieldHitSound: {fileID: 8300000, guid: b4e13f68a601bd84eb16cae54c758e8a, type: 3}
   matchEndSound: {fileID: 8300000, guid: 2a0f815106fc99e4b81b98cc612e1904, type: 3}
@@ -1491,6 +1493,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1065634403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065634399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectInterest: 1
+  DefaultInterestGroups: []
+  DestroyWhenStateAuthorityLeaves: 0
+  AllowStateAuthorityOverride: 1
+  AoiPositionSource: {fileID: 0}
+  Flags: 2561
+  NetworkGuid:
+    RawGuidValue: ca0d452f206240a495b6d0c86a446c4c
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 1065634400}
+  SimulationBehaviours: []
 --- !u!224 &1236999168 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1223984959709585390, guid: 1712a0b6f441d424eb86b6e332a88f4d, type: 3}
