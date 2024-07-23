@@ -12,7 +12,7 @@ public class RespawnPanel : SimulationBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if (playerController.Object.HasInputAuthority == Runner.LocalPlayer) 
+        if (Utilities.IsLocalPlayer(Object)) 
         {
             var timerISRunning = playerController.RespawnTimer.IsRunning;
             childObj.SetActive(timerISRunning);

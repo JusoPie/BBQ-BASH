@@ -20,7 +20,7 @@ public class PauseMenu : SimulationBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        if (playerController.Object.HasInputAuthority == Runner.LocalPlayer)
+        if (Utilities.IsLocalPlayer(Object))
         {
             exitBtn.onClick.AddListener(ExitPauseMenu);
             quitGameBtn.onClick.AddListener(QuitGame);

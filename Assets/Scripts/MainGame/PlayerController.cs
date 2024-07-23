@@ -72,7 +72,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
 
     private void SetLocalObjects()
     {
-        if (Runner.LocalPlayer == Object.HasInputAuthority)
+        if (Utilities.IsLocalPlayer(Object))
         {
             cam.SetActive(true);
 
@@ -130,7 +130,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
     public void BeforeUpdate()
     {
         //We are the local machine
-        if (Runner.LocalPlayer == Object.HasInputAuthority && AcceptAnyInput) 
+        if (Utilities.IsLocalPlayer(Object) && AcceptAnyInput) 
         {
             const string HORIZONTAL = "Horizontal";
             horizontal = Input.GetAxisRaw(HORIZONTAL);
@@ -152,7 +152,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
 
                 CheckJumpInput(input);
 
-                if (Object.HasInputAuthority == Runner.LocalPlayer) 
+                if (Utilities.IsLocalPlayer(Object)) 
                 {
                     CheckPauseInput(input);
                 }

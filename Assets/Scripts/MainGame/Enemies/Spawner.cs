@@ -14,6 +14,11 @@ public class EnemySpawner : NetworkBehaviour
     {
         // Set the initial spawn time to the current time plus the initial delay
         nextSpawnTime = Time.time + initialSpawnDelay;
+
+        if (enemyPrefab == null)
+        {
+            Debug.LogError("Enemy prefab is not assigned!");
+        }
     }
 
     private void Update()
@@ -35,8 +40,21 @@ public class EnemySpawner : NetworkBehaviour
 
     private void SpawnEnemy()
     {
+        if (enemyPrefab == null)
+        {
+            Debug.LogError("Cannot spawn enemy because the enemy prefab is not assigned.");
+            return;
+        }
+
         Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-spawnRangeX, spawnRangeX), transform.position.y, 0);
-        lastSpawnedEnemy = Runner.Spawn(enemyPrefab, spawnPosition, Quaternion.identity).GetComponent<NetworkObject>();
+        NetworkObject networkObject = Runner.Spawn(enemyPrefab, spawnPosition, Quaternion.identity)?.GetComponent<NetworkObject>();
+
+        if (networkObject == null)
+        {
+            Debug.LogError("Failed to spawn enemy. Runner.Spawn returned null or the prefab does not have a NetworkObject component.");
+            return;
+        }
+
+        lastSpawnedEnemy = networkObject;
     }
 }
-
