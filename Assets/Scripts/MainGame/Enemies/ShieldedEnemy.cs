@@ -15,6 +15,7 @@ public class ShieldedEnemy : EnemyController
     {
         base.TakeDamage(damage, attackerId);
         RPC_PlayDamageAnim();
+        
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]

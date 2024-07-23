@@ -69,6 +69,8 @@ public class PlayerHealthController : NetworkBehaviour
             //HitEffects
             Debug.Log("LOCAL PLAYER GOT HIT!");
 
+            SoundFXManager.PlayHitEffect();
+
             const string HIT_CLIP_NAME = "HitScreen";
             hitScreenAnimator.Play(HIT_CLIP_NAME);
 
@@ -85,6 +87,7 @@ public class PlayerHealthController : NetworkBehaviour
 
         if (healthAmount <= 0) 
         {
+            SoundFXManager.PlayHitEffect();
             playerController.KillPlayer();
             Debug.Log("Player is DEAD!");
         }

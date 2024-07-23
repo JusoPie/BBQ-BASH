@@ -16,6 +16,7 @@ public class ShieldAndMeatSpawner : EnemyController
     {
         base.TakeDamage(damage, attackerId);
         RPC_PlayDamageAnim();
+        
     }
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
@@ -44,6 +45,7 @@ public class ShieldAndMeatSpawner : EnemyController
             {
                 Debug.LogError("Spawned enemy prefab is not assigned.");
             }
+            
             base.Die();
 
        
