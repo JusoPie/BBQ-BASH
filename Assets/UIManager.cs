@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreTextPrefab;
@@ -24,6 +25,10 @@ public class UIManager : MonoBehaviour
         if (playerScoreTexts.ContainsKey(playerId))
         {
             playerScoreTexts[playerId].text = $"Player {playerId}: {score}";
+        }
+        else 
+        {
+            Debug.LogError($"Player {playerId} score text not found!");
         }
     }
 }

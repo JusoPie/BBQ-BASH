@@ -67,6 +67,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
         SetLocalObjects();
         PlayerIsAlive = true;
         PlayerID = Object.InputAuthority.PlayerId; // Set PlayerID here
+        Debug.Log($"Player {Runner.LocalPlayer} assigned PlayerID: {PlayerID}");
     }
 
     private void SetLocalObjects()

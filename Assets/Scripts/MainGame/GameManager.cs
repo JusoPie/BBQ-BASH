@@ -53,7 +53,7 @@ public class GameManager : NetworkBehaviour
 
         UpdateScoreText(); // Update the score display
     }
-
+    
     public void AddPoints(int playerId, int points)
     {
         if (Runner.IsServer)
@@ -69,10 +69,11 @@ public class GameManager : NetworkBehaviour
             }
 
             Debug.Log($"Player {playerId} now has {playerScores.Get(playerId)} points.");
+
         }
     }
 
-
+    
     private void UpdateScoreText()
     {
         if (scoreText != null)

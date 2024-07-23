@@ -11,6 +11,8 @@ public class GlobalManagers : MonoBehaviour
 
     public GameManager GameManager { get; set; }
 
+    public UIManager UIManager { get; set; }
+
 
     private void Awake()
     {

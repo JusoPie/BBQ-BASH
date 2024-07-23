@@ -9,7 +9,7 @@ public class CreateNicknamePanel : LobbyPanelBase
     [Header("CreateNicknamePanel Vars")]
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private Button createNicknameBtn;
-    private const int MAX_CHAR_FOR_NICKNAME = 2;
+    private const int MIN_CHAR_FOR_NICKNAME = 2;
 
     public override void InitPanel(LobbyUIManager lobbyUIManager)
     {
@@ -21,13 +21,13 @@ public class CreateNicknamePanel : LobbyPanelBase
 
     private void OnInputValueChanged(string arg0)
     {
-        createNicknameBtn.interactable = arg0.Length > MAX_CHAR_FOR_NICKNAME;
+        createNicknameBtn.interactable = arg0.Length > MIN_CHAR_FOR_NICKNAME;
     }
 
     private void OnClickCreateNickname() 
     { 
      var nickName = inputField.text;
-        if (nickName.Length >= MAX_CHAR_FOR_NICKNAME) 
+        if (nickName.Length >= MIN_CHAR_FOR_NICKNAME) 
         {
             GlobalManagers.Instance.NetworkRunnerControler.SetPlayerNickname(nickName);
 
