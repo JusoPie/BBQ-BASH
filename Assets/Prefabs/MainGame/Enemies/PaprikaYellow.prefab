@@ -355,5 +355,5 @@ MonoBehaviour:
   _interpolationDataSource: 0
   maxHealth: 100
   currentHealth: 0
-  points: 10
+  points: 30
   deathEffect: {fileID: -1753091981234042390, guid: f165ff048d8f9c7479a4fb5080fabfb3, type: 3}
