@@ -221,7 +221,7 @@ public class PlayerController : NetworkBehaviour, IBeforeUpdate
 
         if (DidPressPauseKey && PlayerIsAlive)
         {
-            pauseMenu.childObj.SetActive(true);
+            pauseMenu.TogglePauseMenu();
         }
         
     }

@@ -12,30 +12,30 @@ public class PauseMenu : SimulationBehaviour
     [SerializeField] private Button quitGameBtn;
     [SerializeField] public GameObject childObj;
 
-    void Start() 
+    void Start()
     {
         leaveMatchBtn.onClick.AddListener(() => GlobalManagers.Instance.NetworkRunnerControler.ShutDownRunner());
-
+        exitBtn.onClick.AddListener(ExitPauseMenu);
+        quitGameBtn.onClick.AddListener(QuitGame);
     }
 
     public override void FixedUpdateNetwork()
     {
-        if (Utilities.IsLocalPlayer(Object))
-        {
-            exitBtn.onClick.AddListener(ExitPauseMenu);
-            quitGameBtn.onClick.AddListener(QuitGame);
-        }
-
+        // Moved exitBtn and quitGameBtn listeners to Start()
     }
 
-    private void ExitPauseMenu() 
+    public void TogglePauseMenu()
+    {
+        childObj.SetActive(!childObj.activeSelf);
+    }
+
+    private void ExitPauseMenu()
     {
         childObj.SetActive(false);
     }
 
-    private void QuitGame() 
+    private void QuitGame()
     {
         Application.Quit();
     }
-
 }
