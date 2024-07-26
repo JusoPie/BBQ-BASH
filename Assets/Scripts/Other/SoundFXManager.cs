@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Fusion;
 
 public class SoundFXManager : MonoBehaviour
 {
@@ -11,10 +10,10 @@ public class SoundFXManager : MonoBehaviour
     [SerializeField] private AudioSource source;
 
     private static SoundFXManager instance;
+    private float pitchVariance = 0.1f; // Pitch variance range
 
     protected virtual void Awake()
     {
-        
         if (instance == null)
         {
             instance = this;
@@ -26,10 +25,19 @@ public class SoundFXManager : MonoBehaviour
         }
     }
 
-    private void PlayClip(AudioClip clip)
+    private void PlayClip(AudioClip clip, bool varyPitch = false)
     {
         if (source != null && clip != null)
         {
+            if (varyPitch)
+            {
+                source.pitch = 1.0f + Random.Range(-pitchVariance, pitchVariance);
+            }
+            else
+            {
+                source.pitch = 1.0f; // Reset to default pitch
+            }
+
             source.Stop();
             source.clip = clip;
             source.Play();
@@ -40,7 +48,7 @@ public class SoundFXManager : MonoBehaviour
     {
         if (instance != null)
         {
-            instance.PlayClip(instance.hitSound);
+            instance.PlayClip(instance.hitSound, true);
         }
     }
 
@@ -48,7 +56,7 @@ public class SoundFXManager : MonoBehaviour
     {
         if (instance != null)
         {
-            instance.PlayClip(instance.shieldHitSound);
+            instance.PlayClip(instance.shieldHitSound, true);
         }
     }
 
@@ -56,7 +64,7 @@ public class SoundFXManager : MonoBehaviour
     {
         if (instance != null)
         {
-            instance.PlayClip(instance.matchEndSound);
+            instance.PlayClip(instance.matchEndSound, false); // No pitch variation
         }
     }
 
