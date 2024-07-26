@@ -52,8 +52,8 @@ public class TeleportingEnemy : EnemyController
     {
         if (isDead) return; // Prevent multiple calls to Die
         isDead = true; // Set the isDead flag
-        
 
+        SoundFXManager.PlayHitEffect();
         base.Die();
         // Additional logic specific to TeleportingEnemy can be added here
     }

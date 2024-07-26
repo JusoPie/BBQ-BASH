@@ -14,8 +14,10 @@ public class PaprikaSript : EnemyController
 
     public override void TakeDamage(int damage, int attackerId) 
     {
+        RPC_PlayHitSound();
         base.TakeDamage(damage, attackerId);
         RPC_PlayDamageAnim();
+        
         
     }
 
@@ -23,5 +25,9 @@ public class PaprikaSript : EnemyController
     private void RPC_PlayDamageAnim() 
     {
         animator.SetTrigger("DamagePaprika");
+    }
+    public void RPC_PlayHitSound() 
+    {
+        SoundFXManager.PlayHitEffect();
     }
 }

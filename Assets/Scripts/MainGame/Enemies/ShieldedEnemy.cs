@@ -13,6 +13,7 @@ public class ShieldedEnemy : EnemyController
 
     public override void TakeDamage(int damage, int attackerId)
     {
+        SoundFXManager.PlayHitEffect();
         base.TakeDamage(damage, attackerId);
         RPC_PlayDamageAnim();
         

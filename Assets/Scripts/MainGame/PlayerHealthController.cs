@@ -32,6 +32,7 @@ public class PlayerHealthController : NetworkBehaviour
     {
         currentHealthAmount -= damage;
     }
+    
 
     private static void HealthAmountChanged(Changed<PlayerHealthController> changed)
     {
@@ -82,6 +83,7 @@ public class PlayerHealthController : NetworkBehaviour
 
         else if (!isLocalPlayer) 
         {
+            SoundFXManager.PlayHitEffect();
             playerVisualController.TriggerDamageAnimation();
         }
 

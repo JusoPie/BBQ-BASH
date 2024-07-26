@@ -21,6 +21,7 @@ public class AttackObjScript : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
+        
         CheckIfWeHitAPlayerOrEnemy();
 
         if (lifeTimeTimer.Expired(Runner))
@@ -57,7 +58,7 @@ public class AttackObjScript : NetworkBehaviour
                     {
                         Debug.Log("Did hit a player");
                         player.GetComponent<PlayerHealthController>().Rpc_ReducePlayerHealth(hitDmg);
-                        SoundFXManager.PlayHitEffect();
+                        
                     }
 
                     Runner.Despawn(Object);
@@ -87,9 +88,10 @@ public class AttackObjScript : NetworkBehaviour
                     {
                         Debug.Log("Did hit an enemy");
                         enemy.TakeDamage(hitDmg, attackerId); // Pass the attacker ID
-                        SoundFXManager.PlayHitEffect();
+                        
                         
                     }
+
 
                     Runner.Despawn(Object);
                     return;

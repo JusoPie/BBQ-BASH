@@ -14,6 +14,7 @@ public class ShieldAndMeatSpawner : EnemyController
 
     public override void TakeDamage(int damage, int attackerId)
     {
+        SoundFXManager.PlayShieldHitSound();
         base.TakeDamage(damage, attackerId);
         RPC_PlayDamageAnim();
         

@@ -49,7 +49,7 @@ public class GameManager : NetworkBehaviour
             matchTimer = TickTimer.None;
             OnGameIsOver?.Invoke();
             Debug.Log("MATCH TIMER HAD ENDED!");
-            SoundFXManager.PlayDingDingDing();
+            SoundFXManager.PlayMatchEndSound();
         }
 
         UpdateScoreText(); // Update the score display

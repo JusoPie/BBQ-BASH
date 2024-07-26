@@ -19,11 +19,13 @@ public class PlayerAttackController : NetworkBehaviour
 
     private PlayerController playerController;
     private PlayerVisualController playerVisualController;
+    
 
     public override void Spawned()
     {
         playerController = GetComponent<PlayerController>();
         playerVisualController = GetComponent<PlayerVisualController>();
+        
     }
 
     public override void FixedUpdateNetwork()
@@ -48,8 +50,11 @@ public class PlayerAttackController : NetworkBehaviour
 
             AttackCoolDown = TickTimer.CreateFromSeconds(Runner, delayBetweenAttacks);
 
+            // Spawn attack object
             var attackObj = Runner.Spawn(hitObj, hitObjPos.position, hitObjPos.rotation, Object.InputAuthority);
-            attackObj.GetComponent<AttackObjScript>().Initialize(Object.InputAuthority.PlayerId);  // Initialize with player ID
+            attackObj.GetComponent<AttackObjScript>().Initialize(Object.InputAuthority.PlayerId);
+
+            
 
             StartCoroutine(ResetAttackState());
         }
